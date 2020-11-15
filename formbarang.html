@@ -180,8 +180,37 @@
             margin-top: 10px;
         }
         
-        .button-move{
-            margin-bottom: 50px;
+        .qty .plus-1, .plus-2{
+            cursor: pointer;
+            display: inline-block;
+            color: white;
+            width: 30px;
+            height: 30px;
+            font: 30px/1 Arial,sans-serif;
+            text-align: center;
+            border-radius: 50%;
+            }
+        .qty .minus-1, .minus-2 {
+            cursor: pointer;
+            display: inline-block;
+            color: white;
+            width: 30px;
+            height: 30px;
+            font: 30px/1 Arial,sans-serif;
+            text-align: center;
+            border-radius: 50%;
+            background-clip: padding-box;
+        }
+
+        .button-move input, a{
+            display: inline-block;
+        }
+        .btn-previous{
+            float:left; 
+            margin-top:20px;
+        }
+        .btn-submit{
+            float: right;
         }
       /* ===== MEDIA QUERIES=====*/
       @media screen and (min-width: 768px){
@@ -222,6 +251,11 @@
         .body-pd{
           padding-left: calc(var(--nav-width) + 188px);
         }
+      }
+      @media only screen and (max-width: 600px) {
+          .btn-submit{
+              margin-top: -40px;
+          }
       }
    </style>
 </head>
@@ -275,41 +309,37 @@
             <h2>Formulir Pengiriman Barang</h2>
             </div>
         <div class="order-md-1">
-        <h4 class="mb-3">Data Pengirim</h4>
+        <h4 class="mb-3">Data Barang</h4>
         <form class="needs-validation" novalidate>
             <div class="mb-3"> 
-                <span class="label">Nama Lengkap</span>
-                <input type="text" class="namaLengkap form-control" name="namaLengkap" placeholder="Jane Doe"/>
+                <span class="label">Deskripsi barang</span>
+                <input type="text" class="namaLengkap form-control" name="namaLengkap" placeholder=" "/>
                 <span class="error"> Maaf, kolom ini harus terisi.</span>
             </div>
             <div class="mb-3"> 
-                <span class="label">Nomor Telpon</span>
-                <input type="text" class="nomortelp form-control" name="nomortelp" placeholder="08**********"/>
-                <span class="error"> Maaf, kolom ini harus terisi angka.</span>
+                <span class="label">Berat barang (gr)</span>
+                <div class="qty mt-5">
+                    <span class="minus-1 bg-dark">-</span>
+                    <input type="number" class="count-1" name="qty" value="1" style="text-align: center; width:100px; border-color:gainsboro; border-style:solid; border-width:thin; border-radius: 5px;">
+                    <span class="plus-1 bg-dark">+</span>
+                </div>
             </div>
             <div class="mb-3"> 
-                <span class="label">Waktu Pengiriman</span>
-                <input type="text" class="waktu form-control" name="waktu" placeholder="dd/mm/yyyy" id="datepicker"/>
-                <span class="error"> Maaf, kolom ini harus terisi.</span>
-            </div>
-            <div class="mb-3"> 
-                <span class="label">Alamat Pengirim</span>
-                <input type="text" class="alamat form-control" name="alamat" placeholder="Jalan XYZ no.0"/>
-                <span class="error"> Maaf, kolom ini harus terisi.</span>
-            </div>
-            <div class="mb-3"> 
-                <span class="label">Kota/Kabupaten</span>
-                <input type="text" class="kota form-control" name="kota" placeholder="XYZ"/>
-                <span class="error"> Maaf, kolom ini harus terisi.</span>
-            </div>
-            <div class="mb-3"> 
-                <span class="label">Kode Pos</span>
-                <input type="text" class="kodepos form-control" name="kodepos" placeholder="00000"/>
-                <span class="error"> Maaf, kolom ini harus terisi angka.</span>
+                <span class="label">Jumlah Paket</span>
+                <div class="qty mt-5">
+                    <span class="minus-2 bg-dark">-</span>
+                    <input type="number" class="count-2" name="qty" value="1" style="text-align: center; width:100px; border-color:gainsboro; border-style:solid; border-width:thin; border-radius: 5px;">
+                    <span class="plus-2 bg-dark">+</span>
+                </div>
             </div>
             <div class="button-move">
-                <input class="submit btn btn-outline-danger" type="submit" value="Next" style="float: right;">
-            </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <a class="btn btn-outline-danger btn-previous" role="button">Previous</a>
+                    </div>
+                    <div class="col-sm">
+                        <input class="submit btn btn-outline-danger btn-submit" type="submit" value="Submit">
+                    </div>
         </form>
     </section>
     
@@ -349,9 +379,6 @@
         linkColor.forEach(l=> l.addEventListener('click', colorLink))
 
         $(document).ready(function() {
-            $( function() {
-            $( "#datepicker" ).datepicker();
-            } );
             $('.error').hide();
             $('.submit').click(function(event){
             data=$('.namaLengkap').val();
@@ -360,53 +387,35 @@
                 $('.namaLengkap').next().show();
             } else {
                 $('.namaLengkap').next().hide();
+                window.location.replace("aboutus.html");
             } 
-            data=$('.alamat').val();
-            var len=data.length;
-            if(len<1) {
-                $('.alamat').next().show();
-            } else {
-                $('.alamat').next().hide();
-            } 
-            data=$('.waktu').val();
-            var len=data.length;
-            if(len<1) {
-                $('.waktu').next().show();
-            } else {
-                $('.waktu').next().hide();
-            } 
-            data=$('.kota').val();
-            var len=data.length;
-            if(len<1) {
-                $('.kota').next().show();
-            } else {
-                $('.kota').next().hide();
-            } 
-            data=$('.kodepos').val();
-            if(valid_kodepos(data)){
-                $('.kodepos').next().hide();
-            } else {
-                $('.kodepos').next().show();
-            }data=$('.nomortelp').val();
-            if(valid_nomortelp(data)){
-                $('.nomortelp').next().hide();
-            } else {
-                $('.nomortelp').next().show();
-            }
             event.preventDefault();
             });
         });
-        function valid_kodepos(kodepos)
-        {
-            var pattern=new RegExp(/^[0-9-+]+$/);
-            return pattern.test(kodepos);
-        }
-        function valid_nomortelp(nomortelp)
-        {
-            var pattern=new RegExp(/^[0-9-+]+$/);
-            return pattern.test(nomortelp);
-        }
-        
+        $(document).ready(function(){
+		    $('.count-1').prop('disabled', true);
+   			$(document).on('click','.plus-1',function(){
+				$('.count-1').val(parseInt($('.count-1').val()) + 1 );
+    		});
+        	$(document).on('click','.minus-1',function(){
+    			$('.count-1').val(parseInt($('.count-1').val()) - 1 );
+    				if ($('.count-1').val() == 0) {
+						$('.count-1').val(1);
+					}
+    	    	});
+         });
+         $(document).ready(function(){
+		    $('.count-2').prop('disabled', true);
+   			$(document).on('click','.plus-2',function(){
+				$('.count-2').val(parseInt($('.count-2').val()) + 1 );
+    		});
+        	$(document).on('click','.minus-2',function(){
+    			$('.count-2').val(parseInt($('.count-2').val()) - 1 );
+    				if ($('.count-2').val() == 0) {
+						$('.count-2').val(1);
+					}
+    	    	});
+ 		});
        </script>
 </body>
 </html>

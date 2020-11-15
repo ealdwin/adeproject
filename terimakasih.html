@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
+    <title>Thank You</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
@@ -33,7 +33,19 @@
       *,::before,::after{
         box-sizing: border-box;
       }
-      
+      .container{
+        margin-top: 350px;
+        height: 200px;
+        position: relative;
+      }
+      .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
       body{
         position: relative;
         margin: var(--header-height) 0 0 0;
@@ -46,6 +58,7 @@
       a{
         text-decoration: none;
       }
+
       
       /*===== HEADER =====*/
       .header{
@@ -177,7 +190,7 @@
         }
         .submit { 
             align-items:baseline; 
-            margin-top: 10px;
+            margin-top: 60px;
         }
         
         .qty .plus-1, .plus-2{
@@ -301,39 +314,20 @@
     </div>
     <section class="content">
         <div class="container">
-            <div class="py-5 text-center">
-            <h2>Formulir Pengiriman Barang</h2>
-            </div>
-        <div class="order-md-1">
-        <h4 class="mb-3">Data Barang</h4>
-        <form class="needs-validation" novalidate>
-            <div class="mb-3"> 
-                <span class="label">Deskripsi barang</span>
-                <input type="text" class="namaLengkap form-control" name="namaLengkap" placeholder=" "/>
-                <span class="error"> Maaf, kolom ini harus terisi.</span>
-            </div>
-            <div class="mb-3"> 
-                <span class="label">Berat barang (gr)</span>
-                <div class="qty mt-5">
-                    <span class="minus-1 bg-dark">-</span>
-                    <input type="number" class="count-1" name="qty" value="1" style="text-align: center; width:100px; border-color:gainsboro; border-style:solid; border-width:thin; border-radius: 5px;">
-                    <span class="plus-1 bg-dark">+</span>
-                </div>
-            </div>
-            <div class="mb-3"> 
-                <span class="label">Jumlah Paket</span>
-                <div class="qty mt-5">
-                    <span class="minus-2 bg-dark">-</span>
-                    <input type="number" class="count-2" name="qty" value="1" style="text-align: center; width:100px; border-color:gainsboro; border-style:solid; border-width:thin; border-radius: 5px;">
-                    <span class="plus-2 bg-dark">+</span>
-                </div>
-            </div>
+            <div class="center">
+            <h1 class="text-center">Terima Kasih Sudah Menggunakan Jasa <span class="nav__logo-name"><h1><b><i>ADE<span style="color: #DA3849;">Express</span></i></b></h1></span></h1>
+            <img src="https://www.lawdonut.co.uk/business/sites/lawdonut-business/files/courierservice1_0.jpg" width="1100" height="500"/>
             <div class="button-move">
                 <div class="row">
                     <div class="col-sm">
-                        <input class="submit btn btn-outline-danger btn-submit" type="submit" value="Next">
+                        <div class="center">
+                            <input class="submit btn btn-outline-danger btn-submit" type="submit" value="Back To Homepage">
+                        </div>
                     </div>
-        </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </section>
     
     <script>
@@ -370,45 +364,16 @@
             }
         }
         linkColor.forEach(l=> l.addEventListener('click', colorLink))
-
+        
         $(document).ready(function() {
+            $( function() {
+            $( "#datepicker" ).datepicker();
+            } );
             $('.error').hide();
             $('.submit').click(function(event){
-            data=$('.namaLengkap').val();
-            var len=data.length;
-            if(len<1) {
-                $('.namaLengkap').next().show();
-            } else {
-                $('.namaLengkap').next().hide();
-                window.location.replace("form.html");
-            } 
-            event.preventDefault();
+                window.location.href = 'aboutus.html';
             });
         });
-        $(document).ready(function(){
-		    $('.count-1').prop('disabled', true);
-   			$(document).on('click','.plus-1',function(){
-				$('.count-1').val(parseInt($('.count-1').val()) + 1 );
-    		});
-        	$(document).on('click','.minus-1',function(){
-    			$('.count-1').val(parseInt($('.count-1').val()) - 1 );
-    				if ($('.count-1').val() == 0) {
-						$('.count-1').val(1);
-					}
-    	    	});
-         });
-         $(document).ready(function(){
-		    $('.count-2').prop('disabled', true);
-   			$(document).on('click','.plus-2',function(){
-				$('.count-2').val(parseInt($('.count-2').val()) + 1 );
-    		});
-        	$(document).on('click','.minus-2',function(){
-    			$('.count-2').val(parseInt($('.count-2').val()) - 1 );
-    				if ($('.count-2').val() == 0) {
-						$('.count-2').val(1);
-					}
-    	    	});
- 		});
        </script>
 </body>
 </html>

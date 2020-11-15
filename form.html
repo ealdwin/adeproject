@@ -179,9 +179,15 @@
             align-items:baseline; 
             margin-top: 10px;
         }
-        
-        .button-move{
-            margin-bottom: 50px;
+        .button-move input, a{
+            display: inline-block;
+        }
+        .btn-previous{
+            float:left; 
+            margin-top:20px;
+        }
+        .btn-submit{
+            float: right;
         }
       /* ===== MEDIA QUERIES=====*/
       @media screen and (min-width: 768px){
@@ -307,9 +313,13 @@
                 <input type="text" class="kodepos form-control" name="kodepos" placeholder="00000"/>
                 <span class="error"> Maaf, kolom ini harus terisi angka.</span>
             </div>
-            <div class="button-move">
-                <input class="submit btn btn-outline-danger" type="submit" value="Next" style="float: right;">
-            </div>
+            <div class="row">
+              <div class="col-sm">
+                  <a class="btn btn-outline-danger btn-previous" role="button" href="formbarang.html">Previous</a>
+              </div>
+              <div class="col-sm">
+                  <input class="submit btn btn-outline-danger btn-submit" type="submit" value="Next">
+              </div>
         </form>
     </section>
     
@@ -383,22 +393,34 @@
                 $('.kota').next().hide();
             } 
             data=$('.kodepos').val();
-            if(valid_kodepos(data)){
+            if ($.isNumeric(data)) {
+              if(valid_kodepos(data)){
                 $('.kodepos').next().hide();
+              }
             } else {
+                data=$('.kodepos').val('');
                 $('.kodepos').next().show();
-            }data=$('.nomortelp').val();
-            if(valid_nomortelp(data)){
+            }
+            data=$('.nomortelp').val();
+            if($.isNumeric(data)){
+              if(valid_nomortelp(data)){
                 $('.nomortelp').next().hide();
+              }
             } else {
+                data=$('.nomortelp').val('');
                 $('.nomortelp').next().show();
             }
             event.preventDefault();
-            });
+            if($('.namaLengkap').val() !== '' && $('.alamat').val() !== '' && $('.waktu').val() !== '' && $('.kota').val() !== '' && $('.nomortelp').val() !== ''  && $('.kodepos').val() !== ''){
+              window.location.href = 'formpenerima.html';
+            } else {
+              event.preventDefault();
+            }
+          });
         });
         function valid_kodepos(kodepos)
         {
-            var pattern=new RegExp(/^[0-9-+]+$/);
+            var pattern= /^\d+$/;
             return pattern.test(kodepos);
         }
         function valid_nomortelp(nomortelp)

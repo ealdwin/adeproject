@@ -11,6 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <style>
     :root{
         --header-height: 3rem;
@@ -294,8 +298,8 @@
                 <span class="error"> Maaf, kolom ini harus terisi angka.</span>
             </div>
             <div class="mb-3"> 
-                <span class="label">Waktu Pengiriman</span>
-                <input type="text" class="waktu form-control" name="waktu" placeholder="dd/mm/yyyy" id="datepicker"/>
+                <span class="label">Tanggal Pengiriman</span>
+                <input type="text" class="tanggal form-control" name="tanggal" placeholder="dd/mm/yyyy" id="datepicker"/>
                 <span class="error"> Maaf, kolom ini harus terisi.</span>
             </div>
             <div class="mb-3"> 
@@ -324,6 +328,7 @@
     </section>
     
     <script>
+   
         const showNavbar = (toggleId, navId, bodyId, headerId) =>{
             const toggle = document.getElementById(toggleId),
             nav = document.getElementById(navId),
@@ -360,8 +365,8 @@
 
         $(document).ready(function() {
             $( function() {
-            $( "#datepicker" ).datepicker();
-            } );
+            $("#datepicker").datepicker();
+            });
             $('.error').hide();
             $('.submit').click(function(event){
             data=$('.namaLengkap').val();
@@ -378,12 +383,12 @@
             } else {
                 $('.alamat').next().hide();
             } 
-            data=$('.waktu').val();
+            data=$('.tanggal').val();
             var len=data.length;
             if(len<1) {
-                $('.waktu').next().show();
+                $('.tanggal').next().show();
             } else {
-                $('.waktu').next().hide();
+                $('.tanggal').next().hide();
             } 
             data=$('.kota').val();
             var len=data.length;
